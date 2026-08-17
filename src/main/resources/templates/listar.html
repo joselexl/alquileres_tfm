@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Declaramos que vamos a usar Thymeleaf en este HTML -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Listado base</title>
+    <!-- Más adelante aquí pondremos el CSS de Bootstrap para que se vea profesional -->
+</head>
+<body>
+
+    <h1 th:text="${titulo}">Título de la página</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- AQUÍ ESTÁ LA MAGIA: th:each es como un bucle for de Java -->
+            <!-- Por cada 'inq' dentro de la lista 'inquilinos', repite esta fila <tr> -->
+            <tr th:each="inq : ${inquilinos}">
+                <td th:text="${inq.id}"></td>
+                <td th:text="${inq.nombre}"></td>
+                <td th:text="${inq.apellidos}"></td>
+                <td th:text="${inq.dni}"></td>
+                <td th:text="${inq.email}"></td>
+                <td th:text="${inq.telefono}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
