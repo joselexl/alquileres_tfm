@@ -20,7 +20,8 @@ public class Inquilino implements Serializable{
     private String apellidos;
     private String dni;
     private String email;
-    
+    private String telefono;
+
     public Long getId() {
         return id;
     }
@@ -57,6 +58,6 @@ public class Inquilino implements Serializable{
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    private String telefono;
+    
 
 }
