@@ -1,39 +1,44 @@
 <!DOCTYPE html>
-<!-- Declaramos que vamos a usar Thymeleaf en este HTML -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title th:text="${titulo}">Listado base</title>
-    <!-- Más adelante aquí pondremos el CSS de Bootstrap para que se vea profesional -->
+    
+    <!-- 1. El CSS de Bootstrap SIEMPRE va aquí dentro del head -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- mt-4 le da un margen superior para que no se pegue al techo -->
+    <div class="container mt-4">
+        
+        <h1 th:text="${titulo}" class="text-center mb-4">Título de la página</h1>
 
-    <h1 th:text="${titulo}">Título de la página</h1>
+        <!-- 2. Quitamos el border="1" y usamos las clases de Bootstrap -->
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>DNI</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inq : ${inquilinos}">
+                    <td th:text="${inq.id}"></td>
+                    <td th:text="${inq.nombre}"></td>
+                    <td th:text="${inq.apellidos}"></td>
+                    <td th:text="${inq.dni}"></td>
+                    <td th:text="${inq.email}"></td>
+                    <td th:text="${inq.telefono}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>DNI</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- AQUÍ ESTÁ LA MAGIA: th:each es como un bucle for de Java -->
-            <!-- Por cada 'inq' dentro de la lista 'inquilinos', repite esta fila <tr> -->
-            <tr th:each="inq : ${inquilinos}">
-                <td th:text="${inq.id}"></td>
-                <td th:text="${inq.nombre}"></td>
-                <td th:text="${inq.apellidos}"></td>
-                <td th:text="${inq.dni}"></td>
-                <td th:text="${inq.email}"></td>
-                <td th:text="${inq.telefono}"></td>
-            </tr>
-        </tbody>
-    </table>
-
+    <!-- 3. Solo necesitamos el Bundle, es más limpio -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
