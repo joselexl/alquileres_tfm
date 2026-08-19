@@ -10,4 +10,5 @@ public interface InquilinoService {
     public Inquilino findOne(Long id);
     public void delete(Long id);
     
+    
 }

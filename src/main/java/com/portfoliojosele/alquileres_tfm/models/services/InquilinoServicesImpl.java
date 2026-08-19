@@ -40,4 +40,6 @@ public class InquilinoServicesImpl implements InquilinoService {
     public void delete(Long id) {
         inquilinoDao.deleteById(id);
     }
+
+    
 }
