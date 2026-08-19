@@ -3,6 +3,7 @@ package com.portfoliojosele.alquileres_tfm.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.portfoliojosele.alquileres_tfm.models.entity.Inquilino;
 import com.portfoliojosele.alquileres_tfm.models.services.InquilinoService;
@@ -25,16 +26,18 @@ public class InquilinoController {
     }
 
     @GetMapping("/form")
-    public String crear(Model model) {
-        
-        // 1. Creamos la "caja vacía"
+    public String crear(Model model) {       
         Inquilino inquilino = new Inquilino();
-        
-        // 2. La metemos en la mochila para el HTML
         model.addAttribute("inquilino", inquilino);
         model.addAttribute("titulo", "Formulario de Inquilino");
-        
-        // 3. Llamamos a la vista form.html
         return "form";
     }
+
+    // método de guardar Inquilino
+    @PostMapping("/form")
+    public String guardar(Inquilino inquilino) {      
+        inquilinoService.save(inquilino);    
+        return "redirect:/listar";
+    }
 }
+    
