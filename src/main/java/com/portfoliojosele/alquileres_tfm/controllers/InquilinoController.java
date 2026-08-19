@@ -65,5 +65,18 @@ public class InquilinoController {
         model.addAttribute("titulo", "Editar Inquilino");        
         return "form";
     }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
+        
+        if (id > 0) {
+            // Llamamos a tu Service para borrar
+            inquilinoService.delete(id);
+            // Mandamos mensaje de éxito
+            flash.addFlashAttribute("success", "¡Inquilino eliminado con éxito!");
+        }
+        
+        return "redirect:/listar";
+    }
 }
     

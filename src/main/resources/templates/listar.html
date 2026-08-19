@@ -39,6 +39,8 @@
                         <td th:text="${inq.telefono}"></td>
                         <td class="text-center">
                             <a class="btn btn-warning btn-sm" th:href="@{/form/} + ${inq.id}">Editar</a>
+                            <a class="btn btn-danger btn-sm" th:href="@{/eliminar/} + ${inq.id}" 
+                            onclick="return confirm('¿Estás seguro de que quieres eliminar a este inquilino?');">Eliminar</a>                            
                         </td>
                     </tr>
                 </tbody>
