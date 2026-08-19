@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "inquilinos")
@@ -16,10 +18,20 @@ public class Inquilino implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "El nombre no puede estar vacío")
     private String nombre;
+
+    @NotEmpty(message = "Los apellidos son obligatorios")
     private String apellidos;
+
+    @NotEmpty(message = "El DNI es obligatorio")
     private String dni;
+
+    @NotEmpty(message = "El email es obligatorio")
+    @Email(message = "El formato del email no es correcto (ejemplo@correo.com)")
     private String email;
+
+    // dato opcional no validado
     private String telefono;
 
     public Long getId() {
