@@ -30,19 +30,19 @@
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI</label>
                 <input type="text" class="form-control" th:field="*{dni}" id="dni">
-                <!-- AVISO DE ERROR PARA DNI -->
+                <!-- mostrar error dni-->
                 <div class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="text" class="form-control" th:field="*{email}" id="email">
-                <!-- AVISO DE ERROR PARA EMAIL -->
+                <!-- mostrar  error email -->
                 <div class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
 
             <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
+                <label for="telefono" class="form-label">Teléfono (opcional)</label>
                 <input type="text" class="form-control" th:field="*{telefono}" id="telefono">
                 <!-- El tlf no es obligatorio -->
             </div>
