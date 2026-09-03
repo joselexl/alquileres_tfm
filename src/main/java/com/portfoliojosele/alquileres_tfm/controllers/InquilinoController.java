@@ -39,7 +39,7 @@ public class InquilinoController {
     }
 
     // método de guardar Inquilino
- @PostMapping("/form")
+    @PostMapping("/form")
     public String guardar(@Valid Inquilino inquilino, BindingResult result, Model model, RedirectAttributes flash) {
         
         // errores de validación?
@@ -71,7 +71,7 @@ public class InquilinoController {
         Inquilino inquilino = null;
         //  ID sea mayor que 0 
         if (id > 0) {
-            // Llamamos a nuestro Service para que busque a Francisco en MySQL
+            // Llamamos a nuestro Service para que busque en MySQL
             inquilino = inquilinoService.findOne(id);
         } else {
             // control de id erroneo
