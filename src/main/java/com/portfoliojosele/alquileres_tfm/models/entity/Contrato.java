@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.Audited.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
