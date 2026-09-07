@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Inclusión del fragmento head para unificar metaetiquetas y estilos -->
+<head th:replace="~{layout/layout :: head}"></head>
+<body>    
+    <!-- Barra de navegación principal del aplicativo -->
+    <header th:replace="~{layout/layout :: header}"></header>
+    <div class="container mt-4">        
+        <!-- Bloque para notificaciones flash (Ej: confirmaciones de guardado o borrado) -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>        
+        <h1 th:text="${titulo}" class="text-center mb-4"></h1>        
+        <!-- Enlace al formulario de creación -->
+        <a th:href="@{/inquilinos/form}" class="btn btn-success mb-3">Nuevo Inquilino</a>
+        <!-- Tabla de listado de inquilinos -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>DNI</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iteración sobre la lista de inquilinos inyectada desde el controlador -->
+                    <tr th:each="inq : ${inquilinos}">
+                        <td th:text="${inq.id}"></td>
+                        <td th:text="${inq.nombre}"></td>
+                        <td th:text="${inq.apellidos}"></td>
+                        <td th:text="${inq.dni}"></td>
+                        <td th:text="${inq.email}"></td>
+                        <td th:text="${inq.telefono}"></td>
+                        <td class="text-center">
+                            <!-- Acciones CRUD por registro -->
+                            <a class="btn btn-warning btn-sm" th:href="@{/inquilinos/form/} + ${inq.id}">Editar</a>
+                            <a class="btn btn-danger btn-sm" th:href="@{/inquilinos/eliminar/} + ${inq.id}" 
+                               onclick="return confirm('¿Estás seguro de que quieres eliminar a este inquilino?');">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Inclusión de scripts comunes (Bootstrap) -->
+    <footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>
