@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.portfoliojosele.alquileres_tfm.models.entity.Inquilino;
@@ -14,6 +15,7 @@ import com.portfoliojosele.alquileres_tfm.models.services.InquilinoService;
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/inquilinos")
 public class InquilinoController {
 
     private final InquilinoService inquilinoService;
@@ -27,7 +29,7 @@ public class InquilinoController {
     public String listar(Model model) {
         model.addAttribute("titulo", "Listado de inquilinos");
         model.addAttribute("inquilinos", inquilinoService.findAll());
-        return "listar";
+        return "inquilinos/listar";
     }
 
     @GetMapping("/form")
@@ -35,7 +37,7 @@ public class InquilinoController {
         Inquilino inquilino = new Inquilino();
         model.addAttribute("inquilino", inquilino);
         model.addAttribute("titulo", "Formulario de Inquilino");
-        return "form";
+        return "inquilinos/form";
     }
 
     // método de guardar Inquilino
@@ -46,7 +48,7 @@ public class InquilinoController {
         if (result.hasErrors()) {
             // Si falta el nombre o el DNI  devolvemos el titulo cargamos la pagina del formulario
             model.addAttribute("titulo", "Formulario de Inquilino");
-            return "form"; 
+            return "inquilinos/form"; 
         }
         
         // crear o editar
@@ -63,7 +65,7 @@ public class InquilinoController {
         // envio mensaje a la vista
         flash.addFlashAttribute("success", mensajeFlash);
         
-        return "redirect:/listar";
+        return "redirect:/inquilinos/listar";
     }
 
     @GetMapping("/form/{id}")
@@ -75,11 +77,11 @@ public class InquilinoController {
             inquilino = inquilinoService.findOne(id);
         } else {
             // control de id erroneo
-            return "redirect:/listar";
+            return "redirect:/inquilinos/listar";
         }       
         model.addAttribute("inquilino", inquilino);
         model.addAttribute("titulo", "Editar Inquilino");        
-        return "form";
+        return "inquilinos/form";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -92,7 +94,7 @@ public class InquilinoController {
             flash.addFlashAttribute("success", "¡Inquilino eliminado con éxito!");
         }
         
-        return "redirect:/listar";
+        return "redirect:/inquilinos/listar";
     }
 }
     

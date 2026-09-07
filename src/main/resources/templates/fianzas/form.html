@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 th:text="${titulo}" class="mb-4 text-center"></h1>
+
+        <form th:action="@{/fianzas/form}" th:object="${fianza}" method="post" class="w-50 mx-auto shadow p-4 rounded bg-light">
+            
+            <!-- Campo oculto para el ID -->
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- DESPLEGABLE DE CONTRATO @OneToOne -->
+            <div class="mb-3">
+                <label for="contrato" class="form-label fw-bold">Contrato Asociado</label>
+                <select class="form-select" th:field="*{contrato}" id="contrato">
+                    <option value="">-- Selecciona el contrato --</option>
+                    <!-- lista de contratos -->
+                    <option th:each="cont : ${contratos}" 
+                            th:value="${cont.id}" 
+                            th:text="'Contrato #' + ${cont.id} + ' - ' + ${cont.inquilino.nombre} + ' (' + ${cont.vivienda.direccion} + ')'">
+                    </option>
+                </select>
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('contrato')}" th:errors="*{contrato}"></div>
+            </div>
+
+            <!-- IMPORTE DE LA FIANZA -->
+            <div class="mb-3">
+                <label for="importe" class="form-label fw-bold">Importe de la Fianza (€)</label>
+                <!-- permite escribir decimales -->
+                <input type="number" step="0.01" class="form-control" th:field="*{importe}" id="importe" placeholder="Ej: 800.50">
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('importe')}" th:errors="*{importe}"></div>
+            </div>
+
+            <!-- ESTADO DEL PAGO -->
+            <div class="mb-3">
+                <label for="estadoPago" class="form-label fw-bold">Estado del Pago</label>
+                <select class="form-select" th:field="*{estadoPago}" id="estadoPago">
+                    <option value="">-- ¿El inquilino ha pagado? --</option>
+                    <option value="PENDIENTE">Pendiente de abono</option>
+                    <option value="ABONADA">Abonada al propietario</option>
+                </select>
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('estadoPago')}" th:errors="*{estadoPago}"></div>
+            </div>
+
+            <!-- ESTADO LEGAL (Administración) -->
+            <div class="mb-4">
+                <label for="estadoLegal" class="form-label fw-bold">Estado Legal (Organismo Público)</label>
+                <select class="form-select" th:field="*{estadoLegal}" id="estadoLegal">
+                    <option value="">-- Trámite administrativo --</option>
+                    <option value="NO_DEPOSITADA">No depositada aún</option>
+                    <option value="DEPOSITADA">Depositada en el organismo</option>
+                    <option value="SOLICITADA_DEVOLUCION">Solicitada la devolución</option>
+                    <option value="DEVOLUCION_EN_CURSO">Devolución en curso</option>
+                    <option value="DEVUELTA">Devuelta al inquilino</option>
+                </select>
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('estadoLegal')}" th:errors="*{estadoLegal}"></div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                <button type="submit" class="btn btn-primary px-4">Guardar Fianza</button>
+                <a th:href="@{/fianzas/listar}" class="btn btn-secondary px-4">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
