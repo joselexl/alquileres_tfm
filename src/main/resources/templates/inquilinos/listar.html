@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- Inclusión del fragmento head para unificar metaetiquetas y estilos -->
+<!-- Incluyo el layout -->
 <head th:replace="~{layout/layout :: head}"></head>
 <body>    
-    <!-- Barra de navegación principal del aplicativo -->
+     <!-- Muestro layout -->
     <header th:replace="~{layout/layout :: header}"></header>
     <div class="container mt-4">        
         <!-- Bloque para notificaciones flash (Ej: confirmaciones de guardado o borrado) -->
@@ -18,7 +18,8 @@
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
-                    <tr>                        <th>ID</th>
+                    <tr>                        
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>DNI</th>

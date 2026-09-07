@@ -5,8 +5,7 @@
 <body>
     <!-- Muestro layout -->
     <header th:replace="~{layout/layout :: header}"></header>
-    <div class="container mt-4">
-        
+    <div class="container mt-4">        
         <!-- Mensaje guardados OK -->
         <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
             <span th:text="${success}"></span>
