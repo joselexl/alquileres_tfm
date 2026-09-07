@@ -10,13 +10,10 @@
         <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
             <span th:text="${success}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        
-        <h1 th:text="${titulo}" class="text-center mb-4"></h1>
-        
+        </div>        
+        <h1 th:text="${titulo}" class="text-center mb-4"></h1>        
         <!-- Botón para ir al formulario -->
-        <a th:href="@{/fianzas/form}" class="btn btn-success mb-3">Registrar Fianza</a>
-
+        <a th:href="@{/fianzas/form}" class="btn btn-success mb-3"><i class="bi bi-piggy-bank-fill me-1"></i>Registrar Fianza</a>
         <!-- Tabla Responsiva -->
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -51,9 +48,9 @@
                         </td>
                         
                         <td class="text-center">
-                            <a class="btn btn-warning btn-sm" th:href="@{/fianzas/form/} + ${fian.id}">Editar</a>
+                            <a class="btn btn-warning btn-sm" th:href="@{/fianzas/form/} + ${fian.id}"><i class="bi bi-pencil-square"></i>Editar</a>
                             <a class="btn btn-danger btn-sm" th:href="@{/fianzas/eliminar/} + ${fian.id}" 
-                               onclick="return confirm('¿Seguro que quieres eliminar esta fianza?');">Eliminar</a>
+                               onclick="return confirm('¿Seguro que quieres eliminar esta fianza?');"><i class="bi bi-trash-fill"></i>Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

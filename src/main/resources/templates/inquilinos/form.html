@@ -1,56 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- Incluyo el layout -->
+<!-- Cargo el head desde el layout general -->
 <head th:replace="~{layout/layout :: head}"></head>
-<body>
-     <!-- Muestro layout -->
+<body>    
+    <!-- Barra de navegación -->
     <header th:replace="~{layout/layout :: header}"></header>
-    <div class="container mt-4">
-        <h1 th:text="${titulo}" class="mb-4"></h1>
-
-        <form th:action="@{/form}" th:object="${inquilino}" method="post" class="w-50">
-            <!-- campo oculto para el ID -->
-            <input type="hidden" th:field="*{id}" />
-
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" th:field="*{nombre}" id="nombre">
-                <!-- AVISO DE ERROR PARA NOMBRE -->
-                <div class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    <div class="container mt-5">        
+        <!-- Contenedor centrado para que el form no ocupe toda la pantalla -->
+        <!-- En móviles ocupa el 100% (col-12), en PC el 50% (col-md-6) -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">                
+                <h1 th:text="${titulo}" class="text-center mb-4"></h1>
+                <!-- Tarjeta para darle un borde sutil al formulario (queda más limpio) -->
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">                        
+                        <!-- Ojo a la ruta, tiene que ir a /inquilinos/form -->
+                        <form th:action="@{/inquilinos/form}" th:object="${inquilino}" method="post">
+                            
+                            <!-- Guardo el ID oculto para saber si es un alta o una edición -->
+                            <input type="hidden" th:field="*{id}" />
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label fw-bold">Nombre</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Ej: Juan">
+                                <!-- Aviso si falla la validación del nombre -->
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellidos" class="form-label fw-bold">Apellidos</label>
+                                <input type="text" class="form-control" th:field="*{apellidos}" id="apellidos" placeholder="Ej: Pérez García">
+                                <!-- Aviso si falla la validación de los apellidos -->
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dni" class="form-label fw-bold">DNI / NIE</label>
+                                <input type="text" class="form-control" th:field="*{dni}" id="dni" placeholder="12345678A">
+                                <!-- Aviso si falla el DNI -->
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">Correo Electrónico</label>
+                                <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="usuario@correo.com">
+                                <!-- Aviso si falla el email -->
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="telefono" class="form-label fw-bold">Teléfono <span class="text-muted fw-normal">(opcional)</span></label>
+                                <input type="text" class="form-control" th:field="*{telefono}" id="telefono" placeholder="600123456">
+                                <!-- El teléfono no tiene validación de error porque no es obligatorio -->
+                            </div>
+                            <!-- Botonera -->
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a th:href="@{/inquilinos/listar}" class="btn btn-secondary me-md-2">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Guardar Inquilino</button>
+                            </div>                            
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" th:field="*{apellidos}" id="apellidos">
-                <!-- AVISO DE ERROR PARA APELLIDOS -->
-                <div class="form-text text-danger" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></div>
-            </div>
-
-            <div class="mb-3">
-                <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" th:field="*{dni}" id="dni">
-                <!-- mostrar error dni-->
-                <div class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
-            </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" th:field="*{email}" id="email">
-                <!-- mostrar  error email -->
-                <div class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-            </div>
-
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono (opcional)</label>
-                <input type="text" class="form-control" th:field="*{telefono}" id="telefono">
-                <!-- El tlf no es obligatorio -->
-            </div>
-
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a th:href="@{/listar}" class="btn btn-secondary">Cancelar</a>
-        </form>
-    </div>
-    <!-- Inclusión de scripts comunes (Bootstrap) -->
+        </div>
+    </div>    
+    <!-- Scripts de Bootstrap desde el layout -->
     <footer th:replace="~{layout/layout :: footer}"></footer>
 </body>
 </html>

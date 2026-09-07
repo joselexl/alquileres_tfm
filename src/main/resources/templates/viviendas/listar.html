@@ -15,7 +15,7 @@
         
         <h1 th:text="${titulo}" class="text-center mb-4"></h1>
         
-        <a th:href="@{/viviendas/form}" class="btn btn-success mb-3">Nueva Vivienda</a>
+        <a th:href="@{/viviendas/form}" class="btn btn-success mb-3"><i class="bi bi-house-add-fill me-1"></i>Nueva Vivienda</a>
 
         <!-- Tabla Responsiva -->
         <div class="table-responsive">
@@ -40,9 +40,9 @@
                         <td th:text="${viv.habitaciones}"></td>
                         <td th:text="${viv.estado}"></td>
                         <td class="text-center">
-                            <a class="btn btn-warning btn-sm" th:href="@{/viviendas/form/} + ${viv.id}">Editar</a>
+                            <a class="btn btn-warning btn-sm" th:href="@{/viviendas/form/} + ${viv.id}"><i class="bi bi-pencil-square"></i>Editar</a>
                             <a class="btn btn-danger btn-sm" th:href="@{/viviendas/eliminar/} + ${viv.id}" 
-                               onclick="return confirm('¿Seguro que quieres eliminar esta vivienda?');">Eliminar</a>
+                               onclick="return confirm('¿Seguro que quieres eliminar esta vivienda?');"><i class="bi bi-trash-fill"></i>Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

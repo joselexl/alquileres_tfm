@@ -18,7 +18,7 @@
         <h1 th:text="${titulo}" class="text-center mb-4"></h1>
         
         <!-- Botón para ir al formulario -->
-        <a th:href="@{/contratos/form}" class="btn btn-success mb-3">Nuevo Contrato</a>
+        <a th:href="@{/contratos/form}" class="btn btn-success mb-3"><i class="bi bi-file-earmark-plus-fill me-1"></i>Nuevo Contrato</a>
 
         <!-- Tabla Responsiva -->
         <div class="table-responsive">
@@ -54,9 +54,9 @@
                         </td>
                         
                         <td class="text-center">
-                            <a class="btn btn-warning btn-sm" th:href="@{/contratos/form/} + ${cont.id}">Editar</a>
+                            <a class="btn btn-warning btn-sm" th:href="@{/contratos/form/} + ${cont.id}"><i class="bi bi-pencil-square"></i>Editar</a>
                             <a class="btn btn-danger btn-sm" th:href="@{/contratos/eliminar/} + ${cont.id}" 
-                               onclick="return confirm('¿Seguro que quieres eliminar este contrato? ¡Es una acción irreversible!');">Eliminar</a>
+                               onclick="return confirm('¿Seguro que quieres eliminar este contrato? ¡Es una acción irreversible!');"><i class="bi bi-trash-fill"></i>Eliminar</a>
                         </td>
                     </tr>
                 </tbody>
