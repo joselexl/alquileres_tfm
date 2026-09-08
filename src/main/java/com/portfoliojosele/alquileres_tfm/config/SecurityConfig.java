@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
+                .loginPage("/login") // Le decimos cuál es nuestra ruta HTML
                 .defaultSuccessUrl("/", true) // Redirige a la raíz al acertar
                 .permitAll()
             )
