@@ -15,8 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    // 1. EL ESCUDO: Configuramos qué rutas están protegidas
+    // Rutas protegidas
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -32,22 +31,20 @@ public class SecurityConfig {
             .logout(logout -> logout
                 .permitAll()
             );
-
         return http.build();
     }
-
-    // 2. EL ENCRIPTADOR (Súper profesional para el TFM)
+    // Encriptador
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // 3. EL USUARIO: Creamos el administrador en memoria
+    // Creo el administrador en memoria
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.builder()
             .username("admin")
-            // Usamos el encriptador real para guardar la contraseña de forma segura
+            // Encriptador real para guardar la contraseña de forma segura
             .password(passwordEncoder().encode("admin123")) 
             .roles("ADMIN")
             .build();

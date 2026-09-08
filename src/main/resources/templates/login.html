@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Head estilos y título -->
+<head th:replace="~{layout/layout :: head}"></head>
+<!-- Fondo gris claro para darle un toque corporativo a la pantalla de login -->
+<body class="bg-light">    
+    <!-- En el login NO cargamos el menú superior (header) porque aún no han entrado -->
+    <div class="container mt-5">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-6 col-lg-4 mt-5">                
+                <!-- Título -->
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">AppRent TFM</h2>
+                    <p class="text-muted">Acceso al panel de gestión</p>
+                </div>
+                <!-- Tarjeta del formulario -->
+                <div class="card shadow">
+                    <div class="card-body p-4">                        
+                        <!-- Mensajes de alerta (error o logout) -->
+                        <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+                        <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+                        <!-- Ojo: Action tiene que ser /login por defecto en Spring Security -->
+                        <form th:action="@{/login}" method="post">                            
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-bold">Usuario</label>
+                                <!-- Spring necesita que el name sea "username" -->
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Introduce tu usuario" required autofocus>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-bold">Contraseña</label>
+                                <!-- Spring necesita que el name sea "password" -->
+                                <input type="password" class="form-control" name="password" id="password" placeholder="••••••••" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Entrar</button>
+                            </div>                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <!-- Scripts -->
+    <footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>
