@@ -38,7 +38,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     // Creo el administrador en memoria
     @Bean
     public UserDetailsService userDetailsService() {
@@ -48,7 +47,6 @@ public class SecurityConfig {
             .password(passwordEncoder().encode("admin123")) 
             .roles("ADMIN")
             .build();
-
         return new InMemoryUserDetailsManager(admin);
     }
 }
