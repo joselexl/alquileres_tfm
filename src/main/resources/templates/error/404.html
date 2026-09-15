@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>    
+    <th:block th:replace="~{layout/layout :: head}"></th:block>
+    <title>Página no encontrada - AppRent</title>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <header th:replace="~{layout/layout :: header}"></header>
+    <div class="container text-center mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 py-5">
+                <h1 class="display-1 fw-bold text-secondary">404</h1>
+                <h2 class="mb-4">¡Ups! Parece que nos hemos perdido.</h2>
+                <p class="lead mb-5">
+                    La página que estás buscando no existe, ha sido movida o está temporalmente inaccesible.
+                </p>
+                <!-- Usamos un botón de Bootstrap con el icono de casa para volver -->
+                <a th:href="@{/}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-house-door"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Pie de página  -->
+    <footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>
