@@ -4,8 +4,10 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.portfoliojosele.alquileres_tfm.models.entity.Usuario;
 import com.portfoliojosele.alquileres_tfm.models.services.UsuarioService;
 
 @Controller
@@ -33,5 +35,28 @@ public class UsuarioController {
         
         // Devuelvo la ruta del archivo html (sin el .html) que luego pintaremos con Thymeleaf
         return "usuarios/listar"; 
+    }
+
+    // Método para mostrar el formulario vacío para CREAR
+    @GetMapping("/form")
+    public String crear(Model model) {
+        // Le pasamos un usuario totalmente en blanco a la vista
+        Usuario usuario = new Usuario();
+        
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("titulo", "Crear Nuevo Usuario");
+        
+        return "usuarios/form"; 
+    }
+
+    // Método que recibe los datos cuando el admin pulsa el botón "Guardar Usuario"
+    @PostMapping("/form")
+    public String guardar(Usuario usuario) {
+        
+        // Llamamos al servicio que hicimos antes, que ya se encarga de encriptar la clave
+        usuarioService.save(usuario);
+        
+        // Cuando termine de guardar, hacemos un "redirect" para que vuelva a la lista
+        return "redirect:/usuarios"; 
     }
 }
