@@ -35,6 +35,12 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/fianzas/listar}">Fianzas</a>
                         </li>
+                        <!-- Este enlace SOLO aparecerá si el usuario logueado tiene rol de ADMIN -->
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="nav-link text-warning fw-bold" th:href="@{/usuarios}">
+                                <i class="bi bi-people-fill"></i> Usuarios
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Datos de usuario y logout -->

@@ -1,6 +1,6 @@
 package com.portfoliojosele.alquileres_tfm.models.services;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +15,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     // Obtengo el repositorio para poder hablar con MySQL
     private final UsuarioRepository usuarioRepository;
     // Inyecto el encriptador de contraseñas. 
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     @Transactional(readOnly = true)
