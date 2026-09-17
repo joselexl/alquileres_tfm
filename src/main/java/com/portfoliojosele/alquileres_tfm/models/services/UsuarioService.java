@@ -10,5 +10,11 @@ public interface UsuarioService {
     
     // Método para guardar un usuario nuevo en MySQL
     public void save(Usuario usuario);
+
+    //Para buscar un usuario antes de editarlo
+    public Usuario findById(Long id);
+
+    //Para fulminarlo de la base de datos
+    public void delete(Long id);
     
 }

@@ -4,6 +4,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -58,5 +59,34 @@ public class UsuarioController {
         
         // Cuando termine de guardar, hacemos un "redirect" para que vuelva a la lista
         return "redirect:/usuarios"; 
+    }
+
+    @GetMapping("/form/{id}")
+    public String editar(@PathVariable(value = "id") Long id, Model model) {
+        
+        Usuario usuario = usuarioService.findById(id);
+        
+        // Si el admin mete un ID falso en la URL, lo echamos de vuelta a la lista
+        if (usuario == null) {
+            return "redirect:/usuarios";
+        }
+        
+        usuario.setPassword("");
+        
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("titulo", "Editar Usuario");
+        
+        return "usuarios/form";
+    }
+
+    // Método que atrapa el clic en el botón rojo "Eliminar"
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable(value = "id") Long id) {
+        // Le pasamos la guadaña si el ID es mayor que 0
+        if (id > 0) {
+            usuarioService.delete(id);
+        }
+        // Y volvemos a cargar la tabla limpia
+        return "redirect:/usuarios";
     }
 }

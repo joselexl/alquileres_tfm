@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Incluyo el layout -->
+<head th:replace="~{layout/layout :: head}"></head>
+<body>
+    <!-- Muestro layout -->
+    <header th:replace="~{layout/layout :: header}"></header>
+    <div class="container mt-4">
+        <h1 th:text="${titulo}" class="mb-4 text-center"></h1>
+
+        <!-- /usuarios/form -->
+        <form th:action="@{/usuarios/form}" th:object="${usuario}" method="post" class="w-50 mx-auto">
+            
+            <!-- Campo oculto para el ID  -->
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Ej: admin_madrid">
+                <!-- Chivato de error por si el campo está vacío -->
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Mínimo 4 caracteres">
+                <div class="form-text text-muted">
+                    La contraseña se encriptará automáticamente en la base de datos.
+                </div>
+                <!-- Chivato de error por si la contraseña no cumple requisitos -->
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+
+            <!-- Rol -->
+            <div class="mb-4">
+                <label for="rol" class="form-label">Permisos en el Sistema</label>
+                <select class="form-select" th:field="*{rol}" id="rol">
+                    <option value="">-- Selecciona el rol --</option>
+                    <option value="ROLE_ADMIN">Administrador (Acceso Total)</option>
+                    <option value="ROLE_USER">Usuario Base (Solo Lectura)</option>
+                </select>
+                <!-- Chivato de error -->
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"></div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button type="submit" class="btn btn-primary px-4">Guardar Usuario</button>
+                <!-- volver listar para los usuarios -->
+                <a th:href="@{/usuarios}" class="btn btn-secondary px-4">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <!-- Inclusión de scripts comunes (Bootstrap) -->
+    <footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>

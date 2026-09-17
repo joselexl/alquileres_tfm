@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>    
+    <th:block th:replace="~{layout/layout :: head}"></th:block>
+    <title>Acceso Denegado - AppRent TFM</title>
+</head>
+<body>
+    <!-- Cargo la cabecera con el menú -->
+    <header th:replace="~{layout/layout :: header}"></header>
+    
+    <div class="container text-center mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 py-5">
+                <!-- Indico el 403 en rojo  -->
+                <h1 class="display-1 fw-bold text-danger">403</h1>
+                <h2 class="mb-4"> Acceso denegado.</h2>
+                <p class="lead mb-5">
+                    Lo sentimos, pero no tienes permiso de acceso
+                </p>
+                
+                <!-- Botón para redirigir al usuario  -->
+                <a th:href="@{/}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-shield-lock"></i> Volver a zona segura
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cargo el pie de página -->
+    <footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>
